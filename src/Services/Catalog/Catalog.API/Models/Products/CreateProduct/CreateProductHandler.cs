@@ -3,7 +3,19 @@
     public record CreateProductCommand(string Name, List<string> Category, string Description, string ImageFile, decimal Price)
         : ICommand<CreateProductResult>; //Inherited from MediatR Library
     public record CreateProductResult(Guid Id);
-    internal class CreateProductCommandHandler(IDocumentSession session)
+
+    public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+    {
+        public CreateProductCommandValidator()
+        {
+            RuleFor(x => x.Name).NotEmpty().WithMessage("Name is Required!");
+            RuleFor(x => x.Category).NotEmpty().WithMessage("Category is Required!");
+            RuleFor(x => x.ImageFile).NotEmpty().WithMessage("ImageFile is Required!");
+            RuleFor(x => x.Price).NotEmpty().WithMessage("Price is Required!");
+        }
+    }
+    internal class CreateProductCommandHandler
+        (IDocumentSession session, ILogger<CreateProductCommandHandler> logger)
         : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
 
@@ -11,6 +23,8 @@
         {
             //Business logic to create product.
             //Create Product Entity from Command Object
+
+            logger.LogInformation("CreateProductCommandHandler.Handle called with {@Command}", command);
 
             var product = new Product { 
                 Name = command.Name,
