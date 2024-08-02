@@ -15,7 +15,7 @@
         }
     }
     internal class CreateProductCommandHandler
-        (IDocumentSession session, ILogger<CreateProductCommandHandler> logger)
+        (IDocumentSession session)
         : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
 
@@ -24,7 +24,6 @@
             //Business logic to create product.
             //Create Product Entity from Command Object
 
-            logger.LogInformation("CreateProductCommandHandler.Handle called with {@Command}", command);
 
             var product = new Product { 
                 Name = command.Name,
