@@ -10,10 +10,10 @@ namespace Ordering.Infrastructure
         {
             var connectionString = configuration.GetConnectionString("Database");
 
-            //services.AddDbContext<ApplicationDbContext>((sp, options) =>
-            //{
-            //    options.UseSqlServer(connectionString);
-            //});
+            services.AddDbContext<ApplicationDbContext>((sp, options) =>
+            {
+                options.UseSqlServer(connectionString);
+            });
 
             //services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 

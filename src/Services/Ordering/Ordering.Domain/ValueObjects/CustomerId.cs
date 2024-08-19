@@ -7,7 +7,7 @@
         public static CustomerId Of(Guid value)
         {
             ArgumentNullException.ThrowIfNull(value);
-            if(value == Guid.Empty)
+            if (value == Guid.Empty)
             {
                 throw new DomainExceptions("CustomerId cannot be empty!");
             }
