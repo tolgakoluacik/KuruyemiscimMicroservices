@@ -5,7 +5,7 @@
         public string Name { get; private set; } = default!;
         public decimal Price { get; private set; } = default!;
 
-        private static Product Create(ProductId id, string name, decimal price)
+        public static Product Create(ProductId id, string name, decimal price)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(name);
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(price);
